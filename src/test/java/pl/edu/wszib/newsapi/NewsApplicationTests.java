@@ -1,10 +1,10 @@
-package pl.edu.wszib.project;
+package pl.edu.wszib.newsapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProjectApplicationTests {
+class NewsApplicationTests {
 
 	@Test
 	void contextLoads() {
