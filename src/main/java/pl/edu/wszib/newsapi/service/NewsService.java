@@ -25,6 +25,18 @@ public class NewsService {
         return newsJpaRepository.save(news);
     }
 
+    public News updateById(Long id, News news) {
+        News newsToUpdate = newsJpaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cannot find news with given id"));
+        newsToUpdate.setTitle(news.getTitle());
+        newsToUpdate.setContent(news.getContent());
+        newsToUpdate.setAuthor(news.getAuthor());
+        newsToUpdate.setDate(news.getDate());
+
+        return newsJpaRepository.save(newsToUpdate);
+    }
+
+
     public void deleteById(Long id) {
         newsJpaRepository.deleteById(id);
     }

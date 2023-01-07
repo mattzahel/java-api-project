@@ -46,6 +46,19 @@ public class NewsController {
         return ResponseEntity.created(uri).body(savedNews);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<News> updateNews(@PathVariable Long id, @Validated @RequestBody NewsDto newsRequest) {
+        News news = new News(
+            newsRequest.getTitle(),
+            newsRequest.getContent(),
+            newsRequest.getAuthor(),
+            newsRequest.getDate()
+        );
+
+        News updatedNews = newsService.updateById(id, news);
+        return ResponseEntity.ok(updatedNews);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteNews(@PathVariable Long id) {
