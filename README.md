@@ -8,8 +8,7 @@ It is written in Java and uses the [Spring Boot](https://spring.io/projects/spri
 - Spring Boot
 - H2 Database
 
-## Available endpoints:
-
+## Available endpoints
 - `GET /news` - List all news
 - `GET /news/:id` - Get a news article by id
 - `POST /news` - Create a new news article
@@ -17,7 +16,6 @@ It is written in Java and uses the [Spring Boot](https://spring.io/projects/spri
 - `DELETE /news/:id` - Delete a news article
 
 ## How to run
-
 - Clone this repository
 - Install Maven dependencies
 - Run the application
