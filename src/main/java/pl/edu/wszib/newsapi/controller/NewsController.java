@@ -32,14 +32,7 @@ public class NewsController {
 
     @PostMapping
     public ResponseEntity<News> addNews(@Validated @RequestBody NewsDto newsRequest) {
-       News news = new News(
-           newsRequest.getTitle(),
-           newsRequest.getContent(),
-           newsRequest.getAuthor(),
-           newsRequest.getDate()
-        );
-
-        News savedNews = newsService.save(news);
+        News savedNews = newsService.createNews(newsRequest);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
                 .path("/news/" + savedNews.getId()).build().toUri();
@@ -49,14 +42,8 @@ public class NewsController {
 
     @PutMapping("/{id}")
     public ResponseEntity<News> updateNews(@PathVariable Long id, @Validated @RequestBody NewsDto newsRequest) {
-        News news = new News(
-            newsRequest.getTitle(),
-            newsRequest.getContent(),
-            newsRequest.getAuthor(),
-            newsRequest.getDate()
-        );
+        News updatedNews = newsService.updateById(id, newsRequest);
 
-        News updatedNews = newsService.updateById(id, news);
         return ResponseEntity.ok(updatedNews);
     }
 

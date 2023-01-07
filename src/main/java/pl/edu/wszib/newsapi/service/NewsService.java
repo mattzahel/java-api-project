@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import pl.edu.wszib.newsapi.controller.dto.NewsDto;
 import pl.edu.wszib.newsapi.entity.News;
 import pl.edu.wszib.newsapi.repository.NewsJpaRepository;
 
@@ -21,17 +22,24 @@ public class NewsService {
                 .orElseThrow(() -> new IllegalArgumentException("Cannot find news with given id"));
     }
 
-    public News save(News news) {
+    public News createNews(NewsDto newsDto) {
+        News news = new News(
+            newsDto.getTitle(),
+            newsDto.getContent(),
+            newsDto.getAuthor(),
+            newsDto.getDate()
+        );
+
         return newsJpaRepository.save(news);
     }
 
-    public News updateById(Long id, News news) {
+    public News updateById(Long id, NewsDto newsDto) {
         News newsToUpdate = newsJpaRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Cannot find news with given id"));
-        newsToUpdate.setTitle(news.getTitle());
-        newsToUpdate.setContent(news.getContent());
-        newsToUpdate.setAuthor(news.getAuthor());
-        newsToUpdate.setDate(news.getDate());
+        newsToUpdate.setTitle(newsDto.getTitle());
+        newsToUpdate.setContent(newsDto.getContent());
+        newsToUpdate.setAuthor(newsDto.getAuthor());
+        newsToUpdate.setDate(newsDto.getDate());
 
         return newsJpaRepository.save(newsToUpdate);
     }
