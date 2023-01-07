@@ -1,19 +1,19 @@
 package pl.edu.wszib.newsapi.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.edu.wszib.newsapi.entity.News;
 import pl.edu.wszib.newsapi.repository.NewsJpaRepository;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class NewsService {
     private final NewsJpaRepository newsJpaRepository;
 
-    public List<News> getAllNews() {
-        return newsJpaRepository.findAll();
+    public Page<News> getAllNews(Pageable pageable) {
+        return newsJpaRepository.findAll(pageable);
     }
 
     public News findById(Long id) {

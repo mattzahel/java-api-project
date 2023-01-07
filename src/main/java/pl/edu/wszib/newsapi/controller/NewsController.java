@@ -1,6 +1,8 @@
 package pl.edu.wszib.newsapi.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -11,7 +13,6 @@ import pl.edu.wszib.newsapi.entity.News;
 import pl.edu.wszib.newsapi.service.NewsService;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -20,8 +21,8 @@ public class NewsController {
     private final NewsService newsService;
 
    @GetMapping
-    public List<News> getNews() {
-        return newsService.getAllNews();
+    public Page<News> getAllNews(Pageable pageable) {
+        return newsService.getAllNews(pageable);
     }
 
     @GetMapping("/{id}")
